@@ -35,16 +35,37 @@ func TestGetDriverOpts(t *testing.T) {
 		mcnflag.BoolFlag{
 			Name: "bool-value",
 		},
+		mcnflag.BoolFlag{
+			Name:  "bool-value-default-true",
+			Value: true,
+		},
+		mcnflag.BoolFlag{
+			Name:  "bool-value-default-false",
+			Value: false,
+		},
+		&mcnflag.BoolFlag{
+			Name: "bool-pointer-value",
+		},
+		&mcnflag.BoolFlag{
+			Name:  "bool-pointer-value-default-true",
+			Value: true,
+		},
+		&mcnflag.BoolFlag{
+			Name:  "bool-pointer-value-default-false",
+			Value: false,
+		},
 	}
 	args := strings.Split("some random args --string-value value --int-value=2 --string-slice-value one,two --bool-value", " ")
 	expected := map[string]any{
-		"string-value":               "value",
-		"default-string-value":       "default",
-		"int-value":                  2,
-		"default-int-value":          42,
-		"string-slice-value":         []string{"one", "two"},
-		"default-string-slice-value": []string{"test", "string"},
-		"bool-value":                 true,
+		"string-value":                    "value",
+		"default-string-value":            "default",
+		"int-value":                       2,
+		"default-int-value":               42,
+		"string-slice-value":              []string{"one", "two"},
+		"default-string-slice-value":      []string{"test", "string"},
+		"bool-value":                      true,
+		"bool-value-default-true":         true,
+		"bool-pointer-value-default-true": true,
 	}
 
 	result := GetDriverOpts(flags, args)
