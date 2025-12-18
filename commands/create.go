@@ -323,11 +323,19 @@ func convertMcnFlagsToCliFlags(mcnFlags []mcnflag.Flag) ([]cli.Flag, error) {
 		// always the default)
 		case *mcnflag.BoolFlag:
 			f := f.(*mcnflag.BoolFlag)
-			cliFlags = append(cliFlags, cli.BoolFlag{
-				Name:   f.Name,
-				EnvVar: f.EnvVar,
-				Usage:  f.Usage,
-			})
+			if f.Value { // If default is true, use BoolTFlag
+				cliFlags = append(cliFlags, cli.BoolTFlag{
+					Name:   f.Name,
+					EnvVar: f.EnvVar,
+					Usage:  f.Usage,
+				})
+			} else { // Otherwise use BoolFlag (defaults to false)
+				cliFlags = append(cliFlags, cli.BoolFlag{
+					Name:   f.Name,
+					EnvVar: f.EnvVar,
+					Usage:  f.Usage,
+				})
+			}
 		case *mcnflag.IntFlag:
 			f := f.(*mcnflag.IntFlag)
 			cliFlags = append(cliFlags, cli.IntFlag{

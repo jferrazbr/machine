@@ -17,11 +17,19 @@ func GetDriverOpts(flags []mcnflag.Flag, args []string) *RPCFlags {
 		switch f.(type) {
 		case *mcnflag.BoolFlag:
 			flag := f.(*mcnflag.BoolFlag)
-			setFlag(flag.Name, flag.EnvVar, nil, allFlags, foundFlags, toBool)
+			var defaultValue any
+			if flag.Value {
+				defaultValue = flag.Value
+			}
+			setFlag(flag.Name, flag.EnvVar, defaultValue, allFlags, foundFlags, toBool)
 
 		case mcnflag.BoolFlag:
 			flag := f.(mcnflag.BoolFlag)
-			setFlag(flag.Name, flag.EnvVar, nil, allFlags, foundFlags, toBool)
+			var defaultValue any
+			if flag.Value {
+				defaultValue = flag.Value
+			}
+			setFlag(flag.Name, flag.EnvVar, defaultValue, allFlags, foundFlags, toBool)
 
 		case *mcnflag.StringFlag:
 			flag := f.(*mcnflag.StringFlag)

@@ -59,6 +59,7 @@ type BoolFlag struct {
 	Name   string
 	Usage  string
 	EnvVar string
+	Value  bool
 }
 
 // TODO: Could this be done more succinctly using embedding?
@@ -67,5 +68,5 @@ func (f BoolFlag) String() string {
 }
 
 func (f BoolFlag) Default() interface{} {
-	return false
+	return f.Value
 }

@@ -231,8 +231,9 @@ func (d *Driver) GetCreateFlags() []mcnflag.Flag {
 		},
 		mcnflag.BoolFlag{
 			Name:   flAzureManagedDisks,
-			Usage:  "Configures VM and availability set for managed disks",
+			Usage:  "Configures VM and availability set for managed disks (default: true, unmanaged disks will be retired by Azure on March 31, 2026)",
 			EnvVar: "AZURE_MANAGED_DISKS",
+			Value:  true,
 		},
 		mcnflag.IntFlag{
 			Name:   flAzureFaultDomainCount,
